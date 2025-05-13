@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The End of the American Dream? | Migration Investigation</title>
+    
+    <!-- SoundCite CSS -->
+    <link href='https://cdn.knightlab.com/libs/soundcite/latest/css/player.css' rel='stylesheet'>
+    
+    <!-- TimelineJS CSS -->
+    <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+    
+    <style>
+        /* [Previous CSS styles remain exactly the same until .interactive-element] */
+        
+        /* Zoomable Image Styles */
+        .zoom-container {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            position: relative;
+            margin: 1rem 0;
+        }
+        
+        .zoom-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.1s ease;
+        }
+        
+        .zoom-controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .zoom-controls button {
+            font-size: 18px;
+            padding: 8px 12px;
+            margin: 0 5px;
+            cursor: pointer;
+            background-color: #c33;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        /* [Rest of your existing CSS remains the same] */
+    </style>
+</head>
+<body>
+    <!-- [All your existing HTML content remains the same until the interactive map section] -->
+    
+    <div class="interactive-element">
+        <h3>Migration Routes Through Mexico</h3>
+        <div class="zoom-container">
+            <img class="zoom-image" src="https://caminosoaxaca.wordpress.com/wp-content/uploads/2017/07/02gde_cicr_-_cruz_roja_-_mensajes_de_autocuidado_para_personas_migrantes_-_agosto_2015-2.gif" alt="Migration routes map">
+        </div>
+        <div class="zoom-controls">
+            <button onclick="zoomIn()">+</button>
+            <button onclick="zoomOut()">−</button>
+            <button onclick="resetZoom()">Reset</button>
+        </div>
+    </div>
+
+    <!-- [Rest of your existing HTML content remains the same] -->
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.knightlab.com/libs/soundcite/latest/js/soundcite.min.js"></script>
+    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+    
+    <!-- Initialize Interactive Elements -->
+    <script>
+        // Initialize TimelineJS
+        window.timeline = new TL.Timeline('timeline-embed', 
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vRbByUKtyyIl7Nw0ro83x0v5K9UkLtmI7yaRqr7wAbDhkWiOVWSPXdlW7xSbCim2Z8KMO8GunEutwRe/pubhtml',
+        {
+            font: "Default",
+            lang: "en",
+            initial_zoom: 2,
+            height: "650"
+        });
+        
+        // Zoom functionality
+        const image = document.querySelector('.zoom-image');
+        let scale = 1;
+        
+        function zoomIn() {
+            scale += 0.5;
+            image.style.transform = `scale(${scale})`;
+        }
+        
+        function zoomOut() {
+            if (scale > 1) {
+                scale -= 0.5;
+                image.style.transform = `scale(${scale})`;
+            }
+        }
+        
+        function resetZoom() {
+            scale = 1;
+            image.style.transform = `scale(${scale})`;
+        }
+        
+        // Enable mouse wheel zoom
+        document.querySelector('.zoom-container').addEventListener('wheel', function(e) {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                zoomIn();
+            } else {
+                zoomOut();
+            }
+        });
+    </script>
+</body>
+</html>
